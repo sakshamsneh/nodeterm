@@ -20,6 +20,8 @@ const evaluateCmd = function (userInput) {
     case "cls": commandLibrary.cls(); break;
     case "help": commandLibrary.help(userInputArray.slice(1)); break;
     case "cp": commandLibrary.cp(userInputArray.slice(1)); break;
+    case "mkdir": break;  //create these
+    case "mv": break;
     case "exit": commandLibrary.cls(); break;
     default: process.stdout.write('Typed command is not accurate'); done("");
   }
@@ -35,7 +37,7 @@ const commandLibrary = {
     if (userInput.length == 0);
     else if(userInput[0]==='..') currentdir='';
     else {
-      if (fs.existsSync(currentdir)) done("No such file!");
+      if (fs.existsSync(path.join(__dirname, currentdir))){ done("No such folder!");return;}
       else currentdir =currentdir+ userInput[0];
     }
     done(path.join(__dirname, currentdir));
@@ -44,7 +46,6 @@ const commandLibrary = {
     const fileName = fullPath[0];
     fs.readFile(fileName, (err, data) => {
       if (err) done("No such file!");
-      console.log(data);
       done(data);
     });
   },
@@ -52,7 +53,7 @@ const commandLibrary = {
     const fileName = fullPath[0];
     fs.readFile(fileName, (err, data) => {
       if (err) done("No such file!");
-      var text = data.toString('utf8');// convert string to utf8 
+      var text = data.toString('utf8');
       var slicedText = text.split('\n').slice(0, 10).join('\n');// extract 10 lines of code and join by new line
       var bufferText = Buffer.from(slicedText, 'utf8');// convert sliced text back to Buffer object
       done(bufferText);
