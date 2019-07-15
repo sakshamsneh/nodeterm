@@ -1,18 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 
-const done = function (output) {//write out data
+const done = function (output) {
   process.stdout.write(output);
   process.stdout.write('\nip > ');
 }
 
-const evaluateCmd = function (userInput) {// where we will store our commands
-  const userInputArray = userInput.split(" ");// parses the user input to understand which command was typed
+const evaluateCmd = function (userInput) {
+  const userInputArray = userInput.split(" ");
   const command = userInputArray[0];
 
   switch (command) {
-    //we will add the functionality of echo next within the object commandLibrary 
-    //slice(1) will slice the first letter and save the rest
     case "echo": commandLibrary.echo(userInputArray.slice(1).join(" ")); break;
     case "cat": commandLibrary.cat(userInputArray.slice(1)); break;
     case "head": commandLibrary.head(userInputArray.slice(1)); break;
@@ -90,5 +88,4 @@ const commandLibrary = {
 
 module.exports = {
   evaluateCmd: evaluateCmd,
-  done: done,
 }
