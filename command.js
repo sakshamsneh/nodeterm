@@ -32,16 +32,14 @@ const commandLibrary = {
     done(userInput);
   },
   "cd": function (userInput) {
-    if (userInput.length == 0)  done(currentdir = path.join(__dirname, currentdir));
+    if (userInput.length == 0)  done(path.join(__dirname, currentdir));
     else {
       // currentdir += '\\' + userInput[0];
-      currentdir = userInput[0];
-      done(path.join(__dirname, userInput[0]));
-      // if (fs.existsSync(currentdir)) done("No such file!");
-      // else {
-      //   currentdir = __dirname;
-      //   done(__dirname);
-      // }
+      if (fs.existsSync(currentdir)) done("No such file!");
+      else {
+        currentdir = userInput[0];
+        done(path.join(__dirname, userInput[0]));
+      }
 
       // fs.access(currentdir, fs.F_OK, (err) => {
       //   if (err) done("No such file!");
