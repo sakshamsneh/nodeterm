@@ -1,4 +1,5 @@
-const fs = require('fs');//import fs library
+const fs = require('fs');
+const path = require('path');
 
 const done = function (output) {//write out data
   process.stdout.write(output);
@@ -16,6 +17,7 @@ const evaluateCmd = function(userInput) {// where we will store our commands
     case "cat": commandLibrary.cat(userInputArray.slice(1));  break;
     case "head":  commandLibrary.head(userInputArray.slice(1)); break;
     case "tail":  commandLibrary.tail(userInputArray.slice(1)); break;
+    case "ls":  commandLibrary.ls(userInputArray.slice(1)); break;
     default:  process.stdout.write('Typed command is not accurate');  done("");
   }
 }
@@ -53,7 +55,8 @@ const commandLibrary = {
     })
   },
   "ls": function (fullPath) {
-    ;
+    const directoryPath = path.join(__dirname, fullPath[0]);
+    done(directoryPath);
   }
 };
 
