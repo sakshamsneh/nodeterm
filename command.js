@@ -26,18 +26,17 @@ const evaluateCmd = function (userInput) {
 }
 
 var currentdir='';
-currentdir = __dirname;
 
 const commandLibrary = {
   "echo": function (userInput) {
     done(userInput);
   },
   "cd": function (userInput) {
-    if (userInput.length == 0) done(currentdir);
+    if (userInput.length == 0)  done(currentdir = path.join(__dirname, currentdir));
     else {
-      // const filelist = userInput[0].split("\\");
-      currentdir += '\\' + userInput[0];
-      done(currentdir);
+      // currentdir += '\\' + userInput[0];
+      currentdir = userInput[0];
+      done(path.join(__dirname, userInput[0]));
       // if (fs.existsSync(currentdir)) done("No such file!");
       // else {
       //   currentdir = __dirname;
@@ -82,9 +81,9 @@ const commandLibrary = {
     })
   },
   "ls": function (fullPath) {
-    if (fullPath[0] === '') fullPath[0] = '';
-    // const directoryPath = path.join(__dirname, fullPath[0]);
-    const directoryPath = path.join(currentdir.toString(), fullPath[0]);
+    if (fullPath.length == 0) fullPath[0] = '';
+    fullPath[0]+=currentdir+'\\';
+    const directoryPath = path.join(__dirname, fullPath[0]);
     fs.readdir(directoryPath, function (err, files) {
       if (err) done("No such file!");
       else {
@@ -116,7 +115,6 @@ const commandLibrary = {
       if (err) done("No such file!");
       done("1 file copied");
     });
-    //    done(src+dest);
   },
 };
 
