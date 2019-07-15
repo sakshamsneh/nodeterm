@@ -1,0 +1,14 @@
+{
+  "name": "term",
+  "version": "1.0.0",
+  "description": "Terminal emulator",
+  "main": "bash.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "terminal"
+  ],
+  "author": "saksham",
+  "license": "ISC"
+}
